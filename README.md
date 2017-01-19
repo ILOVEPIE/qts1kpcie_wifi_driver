@@ -1,5 +1,5 @@
-Open Source OpenWRT/LEDE Driver Package for routers using Quantenna QTS1000 series Wifi Radios connected via PCIE
-=================================================================================================================
+OpenWRT/LEDE Driver Package for devices using Quantenna QTS1000 series Wifi Radios connected via PCIE
+=====================================================================================================
 
 Support Table
 -------------------------------------------------------------------------------------------------------------
