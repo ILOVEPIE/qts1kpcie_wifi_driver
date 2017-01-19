@@ -1,0 +1,7 @@
+	menu "Configuration"
+		depends on PACKAGE_qts1kpcierpc
+		config QUANTENNA_IWINFO_PLUGIN
+			bool "Allows for the operating system to query the quantenna wifi card for stats."
+			default n
+	endmenu
+
