@@ -49,8 +49,7 @@ config wifi-device  wifi$devidx
         option macaddr           $(cat /sys/class/net/${dev}/address)
         option hwmode            11ac
         option control_interface $dev
-        option control_host_ip   1.1.1.1
-        option control_device_ip 1.1.1.2
+        option control_cdir		1.1.1.1/29
         # REMOVE THIS LINE TO ENABLE WIFI:
         option disabled          1
 

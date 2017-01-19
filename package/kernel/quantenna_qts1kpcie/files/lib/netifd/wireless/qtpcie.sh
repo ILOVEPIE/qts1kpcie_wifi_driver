@@ -189,17 +189,21 @@ drv_qtpcie_setup() {
 			control_interface macaddr \
 			country txpower hwmode \
 			htmode bf disabled \
-			channel control_device_ip \
-			control_host_ip
+			channel \
+			control_cidr
 	json_select ..
 	
-	local control_broadcast_ip="$(echo $control_device_ip | cut -d. -f1-3).$((($(echo $control_device_ip | cut -d. -f4)/8)*8+7))"
+	local result = $(sh ipcalc.sh $control_cidr)
+	`result`
+	local baseaddr="$(echo $ip | cut -d. -f1-3)"
+	local lsv="$(echo $ip | cut -d. -f4)"
+	control_device_ip = $baseaddr.($lsv+1)
 	uci set network.quantenna_$control_interface=interface
 	uci set network.quantenna_$control_interface.proto=static
 	uci set network.quantenna_$control_interface.ifname=$control_interface
-	uci set network.quantenna_$control_interface.ipaddr=$control_host_ip
-	uci set network.quantenna_$control_interface.netmask=255.255.255.248
-	uci set network.quantenna_$control_interface.broadcast=$control_broadcast_ip
+	uci set network.quantenna_$control_interface.ipaddr=$START
+	uci set network.quantenna_$control_interface.netmask=$NETMASK
+	uci set network.quantenna_$control_interface.broadcast=$BROADCAST
 	uci commit
 
 	ifconfig $control_interface down
@@ -208,11 +212,12 @@ drv_qtpcie_setup() {
 
 	sleep 1s
 
-	qcsapi_sockrpc --host 1.1.1.2 set_ip br0 netmask 255.255.255.248 >> $QT_LOG_FILE
+	qcsapi_sockrpc --host 1.1.1.2 set_ip br0 netmask $NETMASK >> $QT_LOG_FILE
+	qcsapi_sockrpc --host 1.1.1.2 set_ip br0 broadcast $BROADCAST
 	qcsapi_sockrpc --host 1.1.1.2 set_ip br0 ipaddr $control_device_ip >> $QT_LOG_FILE
 	
 	ifconfig $control_interface down
-	ifconfig $control_interface $control_host_ip netmask 255.255.255.248 broadcast $control_broadcast_ip
+	ifconfig $control_interface $START netmask $NETMASK broadcast $BROADCAST
 	ifconfig $control_interface up
 	
 	sleep 1s
@@ -458,8 +463,9 @@ drv_qtpcie_teardown() {
 	json_select ..
 	for_each_interface "sta ap adhoc" qtpcie_interface_cleanup
 	qt_call 0 rfenable 0
-	qcsapi_sockrpc --host $control_device_ip set_ip pcie0 netmask 255.255.255.248
-	qcsapi_sockrpc --host $control_device_ip set_ip pcie0 ipaddr 1.1.1.2
+	qcsapi_sockrpc --host $control_device_ip set_ip br0 netmask 255.255.255.248
+	qcsapi_sockrpc --host $control_device_ip set_ip br0 broadcast 1.1.1.7
+	qcsapi_sockrpc --host $control_device_ip set_ip br0 ipaddr 1.1.1.2
 	initialized=0
 }
 
