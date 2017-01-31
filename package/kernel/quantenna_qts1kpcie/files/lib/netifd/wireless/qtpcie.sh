@@ -194,7 +194,7 @@ drv_qtpcie_setup() {
 	json_select ..
 	
 	local result = $(sh ipcalc.sh $control_cidr)
-	`result`
+	echo "$result" | source /dev/stdin
 	local baseaddr="$(echo $ip | cut -d. -f1-3)"
 	local lsv="$(echo $ip | cut -d. -f4)"
 	control_device_ip = $baseaddr.($lsv+1)
