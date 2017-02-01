@@ -12,8 +12,6 @@ PKG_VERSION:=37.3.1.25-$(WRT_FORK)-1
 PKG_RELEASE:=1
 PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
-PKG_CAT:=zcat
-PKG_SOURCE_SUBDIR:=quantenna
 
 PKG_SOURCE:=quantenna_sources.tar.gz
 PKG_SOURCE_VERSION:=b0e7e4f587e9a0b6655b13e2504ed0b6880354fc
@@ -38,7 +36,7 @@ define KernelPackage/qts1kpcie/description
 endef
 
 define Build/Compile
-	$(MAKE) -C "$(PKG_BUILD_DIR)/quantenna/pcie2/host/arm" PATH="$(TARGET_PATH)" ARCH="$(LINUX_KARCH)" CROSS_COMPILE="$(TARGET_CROSS)" KERNELDIR="$(LINUX_DIR)" all
+	$(MAKE) -C "$(PKG_BUILD_DIR)/../quantenna/pcie2/host/arm" PATH="$(TARGET_PATH)" ARCH="$(LINUX_KARCH)" CROSS_COMPILE="$(TARGET_CROSS)" KERNELDIR="$(LINUX_DIR)" all
 endef
 
 define KernelPackage/qts1kpcie/install

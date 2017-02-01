@@ -9,9 +9,6 @@ endif
 PKG_VERSION:=37.3.1.25-$(WRT_FORK)-1
 PKG_RELEASE:=1
 
-PKG_CAT:=zcat
-PKG_SOURCE_SUBDIR:=quantenna
-
 PKG_SOURCE:=quantenna_sources.tar.gz
 PKG_SOURCE_VERSION:=b0e7e4f587e9a0b6655b13e2504ed0b6880354fc
 PKG_SOURCE_URL:=https://github.com/ILOVEPIE/qts1kpcie_wifi_driver/blob/$(PKG_SOURCE_VERSION)/quantenna_sources.tar.gz?raw=true
@@ -44,13 +41,13 @@ endef
 
 define Build/Compile
 	+$(MAKE_VARS) \
-	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)/quantenna/libqcsapi_client_src \
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)/../quantenna/libqcsapi_client_src \
 		$(MAKE_FLAGS) \
 		qcsapi_pcie qcsapi_sockrpc qcsapi_sockraw;
 	end
 	
 	+$(MAKE_VARS) \
-	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)/quantenna/qevt-client \
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)/../quantenna/qevt-client \
 		$(MAKE_FLAGS) \
 		qevt_client;
 	end
