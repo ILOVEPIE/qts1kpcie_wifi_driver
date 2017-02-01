@@ -25,7 +25,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/qts1kpcierpc
   SUBMENU:=Wireless Drivers
   TITLE:=Quantenna QTS1000 Driver Utilities
-  DEPENDS:=+librpc @((!IWINFO_BACKEND_PLUGIN_SYSTEM && !QUANTENNA_IWINFO_PLUGIN)||IWINFO_BACKEND_PLUGIN_SYSTEM) +QUANTENNA_IWINFO_PLUGIN:qts1kpcie_status_plugin
+  DEPENDS:=+librpc +QUANTENNA_IWINFO_PLUGIN:qts1kpcie_status_plugin
   MAINTAINER:="Patrick Martin thehairyrock@gmail.com"
   URL:="http://www.downloads.netgear.com/files/GPL/R7500-and_qtn_gpl_src_V1.0.0.94.zip"
   MENU:=1
