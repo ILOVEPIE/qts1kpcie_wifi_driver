@@ -41,13 +41,13 @@ endef
 
 define Build/Compile
 	+$(MAKE_VARS) \
-	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)/../quantenna/libqcsapi_client_src \
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)/../quantenna/client/libqcsapi_client_src \
 		$(MAKE_FLAGS) \
 		qcsapi_pcie qcsapi_sockrpc qcsapi_sockraw;
 	end
 	
 	+$(MAKE_VARS) \
-	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)/../quantenna/qevt-client \
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)/../quantenna/client/qevt-client \
 		$(MAKE_FLAGS) \
 		qevt_client;
 	end
@@ -56,10 +56,10 @@ endef
 
 define Package/qts1kpcierpc/install
 	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/quantenna/libqcsapi_client_src/qcsapi_pcie $(1)/usr/sbin/qcsapi_pcie
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/quantenna/libqcsapi_client_src/qcsapi_sockrpc $(1)/usr/sbin/qcsapi_sockrpc
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/quantenna/libqcsapi_client_src/qcsapi_sockraw $(1)/usr/sbin/qcsapi_sockraw
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/quantenna/qevt-client/qevt_client $(1)/usr/sbin/qevt_client
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/../quantenna/client/libqcsapi_client_src/qcsapi_pcie $(1)/usr/sbin/qcsapi_pcie
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/../quantenna/client/libqcsapi_client_src/qcsapi_sockrpc $(1)/usr/sbin/qcsapi_sockrpc
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/../quantenna/client/libqcsapi_client_src/qcsapi_sockraw $(1)/usr/sbin/qcsapi_sockraw
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/../quantenna/client/qevt-client/qevt_client $(1)/usr/sbin/qevt_client
 endef
 
 $(eval $(call BuildPackage,qts1kpcierpc))
