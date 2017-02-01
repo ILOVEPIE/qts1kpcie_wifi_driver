@@ -44,13 +44,11 @@ define Build/Compile
 	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)/../quantenna/client/libqcsapi_client_src \
 		$(MAKE_FLAGS) \
 		qcsapi_pcie qcsapi_sockrpc qcsapi_sockraw;
-	end
 	
 	+$(MAKE_VARS) \
 	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)/../quantenna/client/qevt-client \
 		$(MAKE_FLAGS) \
 		qevt_client;
-	end
 	
 endef
 
