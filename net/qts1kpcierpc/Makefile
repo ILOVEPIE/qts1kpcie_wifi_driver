@@ -54,6 +54,7 @@ endef
 
 define Package/qts1kpcierpc/install
 	$(INSTALL_DIR) $(1)/usr/sbin
+	$(INSTALL_DIR) $(1)/usr/lib
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/../quantenna/client/libqcsapi_client_src/libqcsapi_client.so $(1)/usr/lib/libqcsapi_client.so
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/../quantenna/client/libqcsapi_client_src/libqcsapi_client.so.1 $(1)/usr/lib/libqcsapi_client.so.1
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/../quantenna/client/libqcsapi_client_src/libqcsapi_client.so.1.0.1 $(1)/usr/lib/libqcsapi_client.so.1.0.1
